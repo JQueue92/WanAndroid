@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/posterImg"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_240"
+        android:background="@color/color_45D633"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <include
+        android:id="@+id/titleLayout"
+        layout="@layout/title_layout" />
+
+    <ImageView
+        android:id="@+id/headImg"
+        android:layout_width="@dimen/dp_50"
+        android:layout_height="@dimen/dp_50"
+        android:layout_marginLeft="@dimen/dp_40"
+        app:layout_constraintBottom_toBottomOf="@+id/posterImg"
+        app:layout_constraintLeft_toLeftOf="@+id/posterImg"
+        app:layout_constraintTop_toTopOf="@+id/posterImg"
+        tools:background="@mipmap/header_img" />
+
+    <TextView
+        android:layout_width="@dimen/dp_240"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/dp_10"
+        android:layout_marginRight="@dimen/dp_10"
+        android:ellipsize="end"
+        android:singleLine="true"
+        android:textColor="@color/white"
+        android:textSize="@dimen/sp_14"
+        app:layout_constraintLeft_toRightOf="@+id/headImg"
+        app:layout_constraintTop_toTopOf="@+id/headImg"
+        tools:text="User" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_70"
+        android:layout_marginHorizontal="@dimen/dp_12"
+        android:layout_marginTop="@dimen/dp_50"
+        android:background="@drawable/rect_layout_bg_shape"
+        android:paddingVertical="@dimen/dp_10"
+        app:layout_constraintTop_toBottomOf="@+id/headImg">
+
+        <ImageView
+            android:id="@+id/dividerImg"
+            android:layout_width="@dimen/dp_2"
+            android:layout_height="match_parent"
+            android:background="@color/color_C0C0C0"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent" />
+
+        <TextView
+            android:id="@+id/scoreNameTxt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="积分"
+            android:textColor="@color/white"
+            android:textSize="@dimen/sp_14"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@+id/dividerImg"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/scoreTxt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_4"
+            android:text="1314"
+            android:textColor="@color/color_D2C68C"
+            android:textSize="@dimen/sp_24"
+            app:layout_constraintLeft_toLeftOf="@+id/scoreNameTxt"
+            app:layout_constraintTop_toBottomOf="@+id/scoreNameTxt" />
+
+        <TextView
+            android:id="@+id/rankNameTxt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="排名"
+            android:textColor="@color/white"
+            android:textSize="@dimen/sp_14"
+            app:layout_constraintLeft_toRightOf="@+id/dividerImg"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/rankTxt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_4"
+            android:text="1314"
+            android:textColor="@color/color_D2C68C"
+            android:textSize="@dimen/sp_24"
+            app:layout_constraintLeft_toLeftOf="@+id/rankNameTxt"
+            app:layout_constraintTop_toBottomOf="@+id/rankNameTxt" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
