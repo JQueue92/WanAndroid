@@ -12,12 +12,12 @@ class ObserverView<T : View>(vararg views: WeakReference<T>) {
         when (t) {
             Loading.START -> {
                 viewArray.forEach {
-                    (it.get() as? View)?.isEnabled = false
+                    it.get()?.isEnabled = false
                 }
             }
             Loading.COMPLETED, Loading.ERROR -> {
                 viewArray.forEach {
-                    (it.get() as? View)?.isEnabled = true
+                    it.get()?.isEnabled = true
                 }
             }
         }
