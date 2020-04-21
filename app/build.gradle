@@ -12,13 +12,22 @@ android {
     buildToolsVersion "29.0.2"
     defaultConfig {
         applicationId "com.jqueue.wanandroid"
-        minSdkVersion 19
+        minSdkVersion 21
         targetSdkVersion 29
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
         multiDexEnabled true
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_1_8.toString()
     }
     buildTypes {
         release {
@@ -79,6 +88,8 @@ dependencies {
     implementation "androidx.room:room-ktx:2.2.2"
     kapt "androidx.room:room-compiler:2.2.2"
     androidTestImplementation "androidx.room:room-testing:2.2.2"
+
+    implementation "androidx.multidex:multidex:2.0.1"
 
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'

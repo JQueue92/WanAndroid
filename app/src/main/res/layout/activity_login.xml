@@ -6,12 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".login.LoginActivity">
 
-    <ImageView
-        android:id="@+id/img"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@mipmap/login"/>
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -57,7 +51,7 @@
             android:layout_width="@dimen/dp_240"
             android:layout_height="@dimen/dp_50"
             android:layout_marginTop="@dimen/dp_50"
-            android:background="@drawable/rect_corner_color_shape"
+            android:background="@drawable/btn_bg"
             android:textColor="@color/black"
             android:textSize="@dimen/sp_14"
             android:text="登录" />

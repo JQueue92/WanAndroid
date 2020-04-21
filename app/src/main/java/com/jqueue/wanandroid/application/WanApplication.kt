@@ -8,6 +8,8 @@ import androidx.multidex.MultiDex
 import com.jqueue.wanandroid.BuildConfig
 import com.jqueue.wanandroid.cookie.CookieManger
 import com.jqueue.wanandroid.network.CheckNetworkIntercepter
+import com.jqueue.wanandroid.utils.LogUtil
+import okhttp3.Cache
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -17,6 +19,7 @@ class WanApplication : Application() {
     override fun onCreate() {
         super.onCreate()
         context = this
+        LogUtil.d(context.cacheDir.absolutePath)
     }
 
     override fun attachBaseContext(base: Context?) {
@@ -40,6 +43,7 @@ class WanApplication : Application() {
                                 })
                                 .cookieJar(CookieManger(context))
                                 .addInterceptor(CheckNetworkIntercepter(context))
+                                .cache(Cache(context.cacheDir, 6 * 1024 * 1024))
                                 .build()
                         ).baseUrl(BuildConfig.baseUrl)
                             .addConverterFactory(GsonConverterFactory.create())

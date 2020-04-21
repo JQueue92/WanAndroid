@@ -12,6 +12,6 @@
         android:width="@dimen/dp_2"
         android:color="@android:color/transparent"></stroke>
 
-    <solid android:color="@color/color_45D633"></solid>
+    <solid android:color="@color/gray"></solid>
 
 </shape>

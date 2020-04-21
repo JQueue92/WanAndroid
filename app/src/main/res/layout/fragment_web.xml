@@ -8,6 +8,15 @@
 
     <include layout="@layout/title_layout" />
 
+    <ProgressBar
+        android:id="@+id/progressBar"
+        style="@android:style/Widget.ProgressBar.Horizontal"
+        android:layout_height="6dp"
+        android:layout_width="match_parent"
+        android:progressDrawable="@drawable/progressbar"
+        tools:max="100"
+        tools:progress="20" />
+
     <WebView
         android:id="@+id/webView"
         android:layout_width="match_parent"

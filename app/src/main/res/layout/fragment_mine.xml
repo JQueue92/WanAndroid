@@ -27,6 +27,7 @@
         tools:background="@mipmap/header_img" />
 
     <TextView
+        android:id="@+id/nameTxt"
         android:layout_width="@dimen/dp_240"
         android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/dp_10"
@@ -72,7 +73,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/dp_4"
-            android:text="1314"
+            tools:text="1314"
             android:textColor="@color/color_D2C68C"
             android:textSize="@dimen/sp_24"
             app:layout_constraintLeft_toLeftOf="@+id/scoreNameTxt"
@@ -94,7 +95,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/dp_4"
-            android:text="1314"
+            tools:text="1314"
             android:textColor="@color/color_D2C68C"
             android:textSize="@dimen/sp_24"
             app:layout_constraintLeft_toLeftOf="@+id/rankNameTxt"

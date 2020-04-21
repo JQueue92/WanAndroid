@@ -5,9 +5,12 @@
     <color name="colorAccent">#D81B60</color>
     <color name="black">@android:color/black</color>
     <color name="white">@android:color/white</color>
+    <color name="gray">@android:color/darker_gray</color>
     <color name="color_C0C0C0">#C0C0C0</color>
     <color name="color_808080">#808080</color>
     <color name="color_45D633">#45D6F3</color>
     <color name="color_00404D">#00404D</color>
     <color name="color_D2C68C">#D2C68C</color>
+
+    <color name="card_background">#e0e0e0</color>
 </resources>

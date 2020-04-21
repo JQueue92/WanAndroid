@@ -18,6 +18,7 @@ import androidx.navigation.fragment.findNavController
 
 import com.jqueue.wanandroid.R
 import com.jqueue.wanandroid.base.BaseFragment
+import com.jqueue.wanandroid.utils.LogUtil
 import kotlinx.android.synthetic.main.fragment_web.*
 import kotlinx.android.synthetic.main.title_layout.*
 
@@ -52,30 +53,36 @@ class WebFragment : BaseFragment() {
         return inflater.inflate(R.layout.fragment_web, container, false)
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
+    override fun onStart() {
+        super.onStart()
         webView.settings.apply {
             setSupportZoom(true)
             displayZoomControls = false
             builtInZoomControls = true
             javaScriptEnabled = true
             useWideViewPort = true
+            domStorageEnabled = true
         }
-        titleTxt.text = title
+
         webView.apply {
             webChromeClient = object : WebChromeClient() {
                 override fun onProgressChanged(view: WebView?, newProgress: Int) {
-                    super.onProgressChanged(view, newProgress)
+                    progressBar.progress = newProgress
+                    progressBar.visibility = if (newProgress != 100) View.VISIBLE else View.GONE
+                    LogUtil.d("progress:${newProgress}")
                 }
 
                 override fun onReceivedTitle(view: WebView?, title: String?) {
                     super.onReceivedTitle(view, title)
+                    titleTxt.text = title
+                    LogUtil.d("title:$title")
                 }
             }
             webViewClient = object : WebViewClient() {
 
             }
         }
+
         webView.loadUrl(loadUrl)
         requireActivity().onBackPressedDispatcher.addCallback(this) {
             if (webView.canGoBack()) {
@@ -89,6 +96,14 @@ class WebFragment : BaseFragment() {
     override fun onResume() {
         super.onResume()
         backView.setOnClickListener { findNavController().navigateUp() }
+    }
+
+    override fun onStop() {
+        super.onStop()
+        webView.apply {
+            webChromeClient = null
+            webViewClient = null
+        }
     }
 
     companion object {

@@ -1,29 +1,27 @@
 package com.jqueue.wanandroid.login
 
 import android.content.Intent
-import android.graphics.Bitmap
-import android.graphics.Canvas
-import android.graphics.PixelFormat
-import android.graphics.drawable.Drawable
 import android.os.Bundle
-import android.os.Environment
 import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
-import androidx.lifecycle.lifecycleScope
-import com.bumptech.glide.Glide
 import com.jqueue.wanandroid.MainActivity
 import com.jqueue.wanandroid.R
 import com.jqueue.wanandroid.base.BaseActivity
+import com.jqueue.wanandroid.base.Loading
+import com.jqueue.wanandroid.bean.NaviBean
+import com.jqueue.wanandroid.utils.ObserverView
 import com.jqueue.wanandroid.viewmodel.WanViewModel
 import kotlinx.android.synthetic.main.activity_login.*
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
-import java.io.File
-import java.io.FileOutputStream
+import java.lang.ref.WeakReference
+import kotlin.properties.Delegates
 
 class LoginActivity : BaseActivity() {
+
+    private var isBtnEnable: Boolean by Delegates.observable(false) { _, oldValue, newValue ->
+        Toast.makeText(this, "odlValue:${oldValue}\tnewValue:${newValue}", Toast.LENGTH_SHORT)
+            .show()
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -44,5 +42,18 @@ class LoginActivity : BaseActivity() {
                         }
                     })
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        ViewModelProviders.of(this).get(WanViewModel::class.java)
+            .getNavi().observe(this, Observer {
+                ObserverView(views = *arrayOf(WeakReference(loginBtn))).handleViewState(it)
+                when (it) {
+                    is NaviBean -> {
+                        Toast.makeText(this, "load Successful", Toast.LENGTH_SHORT).show()
+                    }
+                }
+            })
     }
 }

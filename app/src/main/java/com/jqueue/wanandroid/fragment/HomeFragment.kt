@@ -17,6 +17,7 @@ import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.BaseViewHolder
 import com.jqueue.wanandroid.HomeAdapter
 import com.jqueue.wanandroid.R
+import com.jqueue.wanandroid.application.WanApplication
 import com.jqueue.wanandroid.base.BaseFragment
 import com.jqueue.wanandroid.bean.ArticleListBean
 import com.jqueue.wanandroid.bean.BannerBean
@@ -52,6 +53,7 @@ class HomeFragment : BaseFragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+
         ViewModelProviders.of(activity!!).get(WanViewModel::class.java).apply {
             getHomeArticleList(pageIndex)
                 .observe(viewLifecycleOwner,
@@ -60,8 +62,6 @@ class HomeFragment : BaseFragment() {
                     })
             getBanner().observe(viewLifecycleOwner, Observer { bindHeadView(it) })
         }
-
-
     }
 
     private fun bindView(articleListBean: ArticleListBean) {

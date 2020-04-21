@@ -60,10 +60,13 @@ class NaviFragment : BaseFragment() {
 
     override fun onResume() {
         super.onResume()
-        ViewModelProviders.of(activity!!).get(WanViewModel::class.java).getNavi().observe(viewLifecycleOwner,
-            Observer {
-                bindView(it)
-            })
+        ViewModelProviders.of(activity!!).get(WanViewModel::class.java).getNavi()
+            .observe(viewLifecycleOwner,
+                Observer {
+                    if (it is NaviBean) {
+                        bindView(it)
+                    }
+                })
     }
 
     private fun bindView(naviBean: NaviBean) {
