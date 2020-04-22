@@ -36,8 +36,12 @@ class WanViewModel : ViewModel() {
     }
 
     fun getBanner() = liveData {
-        catchException {
+        emit(Loading.START)
+        try {
             emit(WanApplication.getRetrofit().create(WanService::class.java).getBanner())
+            emit(Loading.COMPLETED)
+        } catch (t:Throwable){
+            emit(Loading.ERROR)
         }
     }
 
