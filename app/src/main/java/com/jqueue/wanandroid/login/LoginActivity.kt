@@ -5,11 +5,9 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.ViewModelProviders
 import com.jqueue.wanandroid.MainActivity
 import com.jqueue.wanandroid.R
 import com.jqueue.wanandroid.base.BaseActivity
-import com.jqueue.wanandroid.base.Loading
 import com.jqueue.wanandroid.bean.LoginBean
 import com.jqueue.wanandroid.bean.NaviBean
 import com.jqueue.wanandroid.utils.ObserverView

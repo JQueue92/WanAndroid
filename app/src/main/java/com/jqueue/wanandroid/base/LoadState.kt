@@ -1,5 +1,5 @@
 package com.jqueue.wanandroid.base
 
-enum class Loading {
+enum class LoadState {
     START, COMPLETED, ERROR
 }
