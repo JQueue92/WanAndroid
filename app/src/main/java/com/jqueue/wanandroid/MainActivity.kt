@@ -5,6 +5,7 @@ import androidx.lifecycle.Observer
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
+import androidx.recyclerview.widget.MergeAdapter
 import com.jqueue.wanandroid.base.BaseActivity
 import kotlinx.android.synthetic.main.activity_main.*
 

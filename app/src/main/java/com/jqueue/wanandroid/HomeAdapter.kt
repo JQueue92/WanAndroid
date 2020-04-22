@@ -9,7 +9,7 @@ import com.jqueue.wanandroid.bean.DataX
 import com.jqueue.wanandroid.fragment.LOAD_URL
 import com.jqueue.wanandroid.fragment.TITLE
 
-class HomeAdapter(list: List<DataX>) :
+class HomeAdapter(list: List<DataX> = arrayListOf()) :
     BaseQuickAdapter<DataX, BaseViewHolder>(R.layout.list_home_item, list) {
     override fun convert(helper: BaseViewHolder, item: DataX?) {
         val autherOrSharedUser =

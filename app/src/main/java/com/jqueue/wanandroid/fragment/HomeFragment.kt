@@ -7,8 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.core.os.bundleOf
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.*
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.viewpager2.widget.ViewPager2
@@ -22,12 +21,16 @@ import com.jqueue.wanandroid.base.BaseFragment
 import com.jqueue.wanandroid.bean.ArticleListBean
 import com.jqueue.wanandroid.bean.BannerBean
 import com.jqueue.wanandroid.bean.BannerPic
+import com.jqueue.wanandroid.utils.ObserverView
+import com.jqueue.wanandroid.utils.StatusBarUtil
 import com.jqueue.wanandroid.viewmodel.WanViewModel
 import kotlinx.android.synthetic.main.fragment_home.*
+import java.lang.ref.WeakReference
 
 class HomeFragment : BaseFragment() {
     private var pageIndex: Int = 0
     private lateinit var headViewHolder: BaseViewHolder
+    private lateinit var homeAdapter: HomeAdapter
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -40,7 +43,7 @@ class HomeFragment : BaseFragment() {
                     TypedValue.COMPLEX_UNIT_DIP,
                     170F,
                     resources.displayMetrics
-                ).toInt()
+                ).toInt() + StatusBarUtil.getStatusBarHeight(context!!)
             )
         }
         return inflater.inflate(R.layout.fragment_home, container, false)
@@ -53,20 +56,33 @@ class HomeFragment : BaseFragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-
-        ViewModelProviders.of(activity!!).get(WanViewModel::class.java).apply {
-            getHomeArticleList(pageIndex)
-                .observe(viewLifecycleOwner,
-                    Observer {
-                        bindView(it)
-                    })
-            getBanner().observe(viewLifecycleOwner, Observer { bindHeadView(it) })
+        ViewModelProvider.NewInstanceFactory().create(WanViewModel::class.java).apply {
+            MediatorLiveData<Any>().apply {
+                val observer = Observer<Any> {
+                    ObserverView(views = *arrayOf(WeakReference(swipeRefreshLayout))).handleViewState(it)
+                    when (it) {
+                        is ArticleListBean -> {
+                            bindView(it)
+                        }
+                        is BannerBean -> {
+                            bindHeadView(it)
+                        }
+                    }
+                }
+                addSource(getHomeArticleList(pageIndex).apply { observe(viewLifecycleOwner,observer) }, observer)
+                addSource(getBanner().apply {
+                    observe(viewLifecycleOwner,observer)
+                }, observer)
+            }
+        }
+        homeAdapter = HomeAdapter().apply {
         }
     }
 
     private fun bindView(articleListBean: ArticleListBean) {
         recyclerView.layoutManager = LinearLayoutManager(context)
-        recyclerView.adapter = HomeAdapter(articleListBean.data.datas).apply {
+        homeAdapter.setNewData(articleListBean.data.datas)
+        recyclerView.adapter = homeAdapter.apply {
             addHeaderView(headViewHolder.itemView)
             setOnItemChildClickListener { adapter, view, position ->
                 view.findNavController().navigate(
@@ -74,7 +90,6 @@ class HomeFragment : BaseFragment() {
                     bundleOf(LOAD_URL to data[position].link, TITLE to data[position].title)
                 )
             }
-
         }
     }
 

@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import androidx.lifecycle.observe
 import androidx.navigation.fragment.findNavController
@@ -39,7 +40,7 @@ class MineFragment : BaseFragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        ViewModelProviders.of(activity!!).get(WanViewModel::class.java).getUserCoin()
+        ViewModelProvider.NewInstanceFactory().create(WanViewModel::class.java).getUserCoin()
             .observe(viewLifecycleOwner,
                 Observer {
                     nameTxt.text = it.data.username

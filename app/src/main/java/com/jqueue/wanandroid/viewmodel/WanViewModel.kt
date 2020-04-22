@@ -15,17 +15,23 @@ class WanViewModel : ViewModel() {
             emit(WanApplication.getRetrofit().create(WanService::class.java).getNavi())
             emit(Loading.COMPLETED)
         } catch (t: Throwable) {
+            t.printStackTrace()
             emit(Loading.ERROR)
         }
     }
 
     fun getHomeArticleList(pageIndex: Int = 0) = liveData {
-        catchException {
+        emit(Loading.START)
+        try {
             emit(
                 WanApplication.getRetrofit().create(WanService::class.java).getHomeArticleList(
                     pageIndex
                 )
             )
+            emit(Loading.COMPLETED)
+        } catch (t:Throwable){
+            t.printStackTrace()
+            emit(Loading.ERROR)
         }
     }
 
@@ -36,8 +42,13 @@ class WanViewModel : ViewModel() {
     }
 
     fun login(name: String, pwd: String) = liveData {
-        catchException {
+        emit(Loading.START)
+        try {
             emit(WanApplication.getRetrofit().create(WanService::class.java).login(name, pwd))
+            emit(Loading.COMPLETED)
+        } catch (e:Throwable){
+            e.printStackTrace()
+            emit(Loading.ERROR)
         }
     }
 

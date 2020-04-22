@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.Navigation
 import androidx.navigation.findNavController
@@ -60,7 +61,7 @@ class NaviFragment : BaseFragment() {
 
     override fun onResume() {
         super.onResume()
-        ViewModelProviders.of(activity!!).get(WanViewModel::class.java).getNavi()
+        ViewModelProvider.NewInstanceFactory().create(WanViewModel::class.java).getNavi()
             .observe(viewLifecycleOwner,
                 Observer {
                     if (it is NaviBean) {
